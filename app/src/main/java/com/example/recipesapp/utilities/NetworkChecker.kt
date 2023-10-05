@@ -10,13 +10,16 @@ import android.net.NetworkCapabilities
  */
 class NetworkChecker(private val connectivityManager: ConnectivityManager) {
     /**
-     * Performs the specified action if a valid internet connection is available.
+     * Performs actions based on the availability of a valid internet connection.
      *
-     * @param action The action to perform if a valid internet connection is available.
+     * @param actionIfConnected Lambda expression to execute when there is a valid internet connection.
+     * @param actionIfNotConnected Lambda expression to execute when there is no valid internet connection.
      */
-    fun performAction(action: () -> Unit) {
+    fun performAction(actionIfConnected: () -> Unit, actionIfNotConnected: () -> Unit) {
         if (hasValidInternetConnection()) {
-            action()
+            actionIfConnected()
+        } else {
+            actionIfNotConnected()
         }
     }
 
