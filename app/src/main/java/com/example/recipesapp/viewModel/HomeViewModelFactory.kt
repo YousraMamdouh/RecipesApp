@@ -18,7 +18,7 @@ class HomeViewModelFactory(private val _repo: RepoInterface) : ViewModelProvider
      * @throws IllegalArgumentException If the provided modelClass is not found.
      */
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return if (modelClass.isAssignableFrom(HomeViewModelFactory::class.java)) {
+        return if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
             HomeViewModel(_repo) as T
         } else {
             throw IllegalArgumentException("View class not found")

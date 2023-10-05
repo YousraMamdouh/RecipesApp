@@ -5,6 +5,7 @@ import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ProgressBar
+import androidx.cardview.widget.CardView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,8 +20,7 @@ import com.example.recipesapp.viewModel.HomeViewModelFactory
  * Home View of the Recipes App responsible for displaying a list of recipes.
  */
 class HomeView : AppCompatActivity() {
-    val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-    val networkChecker = NetworkChecker(connectivityManager)
+
 
     // UI components
     private lateinit var recyclerView: RecyclerView
@@ -29,16 +29,21 @@ class HomeView : AppCompatActivity() {
     private lateinit var adapter: RecipesAdapter
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var progressBar: ProgressBar
-    private lateinit var noInternetRecyclerView: RecyclerView
+    private lateinit var noInternetRecyclerView: CardView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        recyclerView = findViewById(R.id.recyclerView)
-        progressBar = findViewById(R.id.progressBar)
-        setMyProgressBarVisibility(true)
+        initializeViews()
         createViewModel()
+        setMyProgressBarVisibility(true)
         setUpRecyclerView()
+
+        // Initialize the ConnectivityManager to check network connectivity
+        val connectivityManager =
+            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        // Create an instance of NetworkChecker to perform network checks
+        val networkChecker = NetworkChecker(connectivityManager)
         // Initially, set the "No Internet" RecyclerView to be visible
         noInternetRecyclerView.visibility = RecyclerView.VISIBLE
         // Perform a network check and handle visibility based on network availability
@@ -60,6 +65,7 @@ class HomeView : AppCompatActivity() {
             )
         )
         viewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
+
     }
 
     /**
@@ -83,6 +89,15 @@ class HomeView : AppCompatActivity() {
         adapter = RecipesAdapter(this, ArrayList())
         recyclerView.adapter = adapter
         recyclerView.layoutManager = layoutManager
+    }
+
+    /**
+     * Initializes and sets up the views used in the activity.
+     */
+    private fun initializeViews() {
+        recyclerView = findViewById(R.id.recyclerView)
+        progressBar = findViewById(R.id.progressBar)
+        noInternetRecyclerView = findViewById(R.id.internetProblemCardView)
     }
 
     /**
