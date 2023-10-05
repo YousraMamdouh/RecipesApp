@@ -2,7 +2,7 @@ package com.example.recipesapp.model
 
 import com.example.recipesapp.network.RemoteService
 
-class Repository(var remoteSource: RemoteService):RepoInterface{
+class Repository(private var remoteSource: RemoteService):RepoInterface{
 
 
 
