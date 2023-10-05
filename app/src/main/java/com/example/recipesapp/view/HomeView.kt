@@ -52,16 +52,17 @@ class HomeView : AppCompatActivity() {
         val networkChecker = NetworkChecker(connectivityManager)
 
         // Perform a network check and handle visibility based on network availability
-        networkChecker.performAction {
-            // Code to execute when there is a valid internet connection
-            observeRecipesLiveData()
-        }
-
-
-
-
-
-
+        networkChecker.performAction(
+            actionIfConnected = {
+                noInternetCardView.visibility = CardView.GONE
+                observeRecipesLiveData()
+            },
+            actionIfNotConnected = {
+                Toast.makeText(this, Constants.NO_INTERNET_MESSAGE, Toast.LENGTH_SHORT).show()
+                setMyProgressBarVisibility(false)
+                noInternetCardView.visibility = CardView.VISIBLE
+            }
+        )
     }
 
     /**
