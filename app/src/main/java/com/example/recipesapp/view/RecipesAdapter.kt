@@ -9,14 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipesapp.utilities.loadImageAsync
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 
 /**
@@ -51,7 +49,7 @@ class RecipesAdapter(
         val currentRecipe: Recipe = getItem(position)
         holder.recipeName.text = currentRecipe.name
         holder.recipeDescription.text = currentRecipe.description
-        lifecycleOwner.lifecycleScope.launch {
+        GlobalScope.launch(Dispatchers.Main) {
             holder.recipeImage.loadImageAsync(currentRecipe.thumb)
         }
 

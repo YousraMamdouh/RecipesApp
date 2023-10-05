@@ -3,7 +3,6 @@ package com.example.recipesapp.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.recipesapp.model.Recipe
 import com.example.recipesapp.model.RepoInterface
 import kotlinx.coroutines.Dispatchers
