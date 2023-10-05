@@ -11,13 +11,8 @@ import kotlinx.coroutines.launch
 
 class HomeActivityViewModel(private val _repo: RepoInterface): ViewModel() {
 
-
-
     private var _recipes: MutableLiveData<List<Recipe>> = MutableLiveData<List<Recipe>>()
     val recipes: LiveData<List<Recipe>> = _recipes
-
-
-
     init {
         getProductsFromAPI()
     }

@@ -1,6 +1,10 @@
 package com.example.recipesapp.network
 
 import com.example.recipesapp.model.Recipe
+import com.example.recipesapp.network.RecipesClient
+import com.example.recipesapp.network.ApiService
+import com.example.recipesapp.network.RemoteService
+
 
 class RecipesClient: RemoteService {
 
@@ -9,20 +13,25 @@ class RecipesClient: RemoteService {
     }
 
 
-    companion object {
-        private var instance: RecipesClient? = null
+
+    companion object{
+        private var instance: RecipesClient?=null
         fun getInstance(): RecipesClient {
-            return instance ?: synchronized(this)
+            return instance?: synchronized(this)
             {
-                val temp = RecipesClient()
-                instance = temp
+                val temp= RecipesClient()
+                instance=temp
                 temp
             }
         }
     }
 
+
     override suspend fun getAllRecipes(): List<Recipe> {
-        val response = apiService.getRecipes()
+        val response =  apiService.getRecipes()
         return response
     }
+
 }
+
+
