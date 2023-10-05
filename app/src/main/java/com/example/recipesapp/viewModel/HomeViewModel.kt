@@ -3,6 +3,7 @@ package com.example.recipesapp.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.recipesapp.model.Recipe
 import com.example.recipesapp.model.RepoInterface
 import kotlinx.coroutines.Dispatchers
@@ -19,18 +20,21 @@ class HomeViewModel(private val _repo: RepoInterface) : ViewModel() {
 
     // Expose the recipes as LiveData to observe changes from the UI.
     val recipes: LiveData<List<Recipe>> = _recipes
+
     /**
      * Initializes the ViewModel and fetches recipes from the API.
      */
     init {
         getProductsFromAPI()
     }
+
     /**
      * Fetches recipes from the API using a coroutine on the IO dispatcher.
      * Updates the [_recipes] LiveData with the fetched data.
      */
     private fun getProductsFromAPI() {
-        viewModelScope.launch(Dispatchers.IO) {
+
+        viewModelScope.launch {
             _recipes.postValue(_repo.getAllRecipes())
         }
     }
