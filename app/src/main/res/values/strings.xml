@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">RecipesApp</string>
+    <string name="recipes">Recipes</string>
+    <string name="noInternetAlert">No Internert Connection! \n</string>
+    <string name="guidanceWhenNoInternet">please check your connection\n and try again</string>
+    <string name="error404"> Error 404! </string>
+    <string name="guidanceWithError404"> something went wrong \n please try again later </string>
 </resources>
