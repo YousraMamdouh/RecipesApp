@@ -1,6 +1,8 @@
 package com.example.recipesapp.model
 
-class Repository(var remoteSource:RemoteService):RepoInterface{
+import com.example.recipesapp.network.RemoteService
+
+class Repository(var remoteSource: RemoteService):RepoInterface{
 
 
 
@@ -19,8 +21,8 @@ class Repository(var remoteSource:RemoteService):RepoInterface{
         }
     }
 
-    override suspend fun getAllStores(): List<Recipe> {
-        //Log.d("Yousra", "Look: ${remoteSource.getAllStores()[0].storeName}")
-        return remoteSource.getAllStores()
+
+    override suspend fun getAllRecipes(): List<Recipe> {
+        return remoteSource.getAllRecipes()
     }
 }
