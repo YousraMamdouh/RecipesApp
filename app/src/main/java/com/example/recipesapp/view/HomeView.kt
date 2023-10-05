@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipesapp.R
 import com.example.recipesapp.model.Repository
-import com.example.recipesapp.network.NetworkChecker
+import com.example.recipesapp.utilities.NetworkChecker
 import com.example.recipesapp.network.RecipesClient
 import com.example.recipesapp.viewModel.HomeViewModel
 import com.example.recipesapp.viewModel.HomeViewModelFactory

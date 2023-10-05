@@ -1,4 +1,4 @@
-package com.example.recipesapp.network
+package com.example.recipesapp.utilities
 
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities

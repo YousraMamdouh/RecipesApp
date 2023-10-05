@@ -3,15 +3,23 @@ package com.example.recipesapp.view
 import com.example.recipesapp.R
 import com.example.recipesapp.model.Recipe
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.StrictMode
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.recipesapp.utilities.loadImageAsync
+import java.io.IOException
+import java.io.InputStream
+import java.net.URL
 
 /**
  * Adapter class for displaying a list of recipes in a RecyclerView.
@@ -45,7 +53,12 @@ class RecipesAdapter(
         val currentRecipe: Recipe = getItem(position)
         holder.recipeName.text = currentRecipe.name
         holder.recipeDescription.text = currentRecipe.description
-        holder.recipeImage.setImageURI(Uri.parse(currentRecipe.thumb))
+        lifecycleScope.launch {
+            holder.recipeImage.loadImageAsync(currentRecipe.thumb)
+        }
+
+
+
     }
 
     /**
@@ -61,6 +74,7 @@ class RecipesAdapter(
 
     }
 }
+
 
 /**
  * DiffUtil.ItemCallback implementation for efficient RecyclerView updates.
