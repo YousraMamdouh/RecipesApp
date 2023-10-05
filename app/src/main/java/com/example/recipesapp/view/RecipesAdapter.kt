@@ -3,9 +3,11 @@ package com.example.recipesapp.view
 import com.example.recipesapp.R
 import com.example.recipesapp.model.Recipe
 import android.content.Context
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -45,6 +47,9 @@ class RecipesAdapter(
         //  Glide.with(context).load(currentStore.storeLogo).placeholder(R.drawable.placeholder_image).into(holder.StoreImage)
         holder.recipeName.text = currentRecipe.name
         holder.recipeDescription.text = currentRecipe.description
+        holder.recipeImage.setImageURI(Uri.parse(currentRecipe.thumb))
+
+
     }
 
     /**
@@ -55,6 +60,7 @@ class RecipesAdapter(
     class ViewHolder(private val itemView: View) : RecyclerView.ViewHolder(itemView) {
         val recipeName: TextView = itemView.findViewById(R.id.recipeName)
         val recipeDescription: TextView = itemView.findViewById(R.id.recipeDescription)
+        val recipeImage:ImageView = itemView.findViewById(R.id.recipeImage)
         //  val StoreImage=itemView.findViewById<ImageView>(R.id.storeImage)
 
     }
