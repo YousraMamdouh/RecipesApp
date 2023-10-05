@@ -2,17 +2,17 @@ package com.example.recipesapp.network
 
 import com.example.recipesapp.model.Recipe
 import com.example.recipesapp.network.RecipesClient
-import com.example.recipesapp.network.ApiService
+
 import com.example.recipesapp.network.RemoteService
 
 
 class RecipesClient: RemoteService {
 
-    val apiService: ApiService by lazy {
-        RetrofitHelper.retrofitInstance.create(ApiService::class.java)
-    }
-
-
+//    val apiService: ApiService by lazy {
+//        RetrofitHelper.retrofitInstance.create(ApiService::class.java)
+//    }
+//
+//
 
     companion object{
         private var instance: RecipesClient?=null
@@ -28,7 +28,7 @@ class RecipesClient: RemoteService {
 
 
     override suspend fun getAllRecipes(): List<Recipe> {
-        val response =  apiService.getRecipes()
+        val response =  ApiHandler().fetchData()
         return response
     }
 
