@@ -12,8 +12,8 @@ import java.net.URL
 class ApiHandler {
     val TAG = "domy"
 
-    fun fetchData(){
-        Thread(Runnable {
+   fun fetchData(){
+        suspend {
             val connection = URL(NetworkConstants.BASE_URL).openConnection() as HttpURLConnection
             connection.requestMethod = "GET"
             connection.setRequestProperty("Content-Type","application/json")
@@ -46,6 +46,7 @@ class ApiHandler {
             {
                 Log.d(TAG,"In_Error ${e.localizedMessage}")
             }
-        }).start()
+        }
+
     }
 }
