@@ -40,10 +40,6 @@ class RecipesAdapter(
         return ViewHolder(view)
     }
 
-
-//    override fun getItemCount(): Int = products.size
-
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // Bind data to the views of each RecyclerView item.
         val currentRecipe: Recipe = getItem(position)
@@ -64,8 +60,7 @@ class RecipesAdapter(
     class ViewHolder(private val itemView: View) : RecyclerView.ViewHolder(itemView) {
         val recipeName: TextView = itemView.findViewById(R.id.recipeName)
         val recipeDescription: TextView = itemView.findViewById(R.id.recipeDescription)
-        val recipeImage:ImageView = itemView.findViewById(R.id.recipeImage)
-        //  val StoreImage=itemView.findViewById<ImageView>(R.id.storeImage)
+        val recipeImage: ImageView = itemView.findViewById(R.id.recipeImage)
 
     }
 }

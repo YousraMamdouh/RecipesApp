@@ -33,7 +33,7 @@ class HomeView : AppCompatActivity() {
     private lateinit var adapter: RecipesAdapter
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var progressBar: ProgressBar
-    private lateinit var noInternetCardView:CardView
+    private lateinit var noInternetCardView: CardView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,26 +43,7 @@ class HomeView : AppCompatActivity() {
         createViewModel()
         setMyProgressBarVisibility(true)
         setUpRecyclerView()
-      //  noInternetCardView.visibility = CardView.VISIBLE
-
-        // Initialize the ConnectivityManager to check network connectivity
-        val connectivityManager =
-            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        // Create an instance of NetworkChecker to perform network checks
-        val networkChecker = NetworkChecker(connectivityManager)
-
-        // Perform a network check and handle visibility based on network availability
-        networkChecker.performAction(
-            actionIfConnected = {
-                noInternetCardView.visibility = CardView.GONE
-                observeRecipesLiveData()
-            },
-            actionIfNotConnected = {
-                Toast.makeText(this, Constants.NO_INTERNET_MESSAGE, Toast.LENGTH_SHORT).show()
-                setMyProgressBarVisibility(false)
-                noInternetCardView.visibility = CardView.VISIBLE
-            }
-        )
+        checkNetwork()
     }
 
     /**
@@ -83,12 +64,10 @@ class HomeView : AppCompatActivity() {
      */
     private fun observeRecipesLiveData() {
         viewModel.recipes.observe(this) { recipes ->
-            if (!recipes.isNullOrEmpty()){
+            if (!recipes.isNullOrEmpty()) {
                 adapter.submitList(recipes)
                 setMyProgressBarVisibility(false)
-        }
-        else
-            {
+            } else {
                 Toast.makeText(this, Constants.API_RESPONSE_ERROR, Toast.LENGTH_LONG).show()
             }
         }
@@ -126,5 +105,25 @@ class HomeView : AppCompatActivity() {
             progressBar.visibility = ProgressBar.GONE
     }
 
-
+    /**
+     * checks the internet connectivity and decide what action to take
+     */
+    private fun checkNetwork() {
+        // Initialize the ConnectivityManager to check network connectivity
+        val connectivityManager =
+            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        // Create an instance of NetworkChecker to perform network checks
+        val networkChecker = NetworkChecker(connectivityManager)
+        networkChecker.performAction(
+            actionIfConnected = {
+                noInternetCardView.visibility = CardView.GONE
+                observeRecipesLiveData()
+            },
+            actionIfNotConnected = {
+                Toast.makeText(this, Constants.NO_INTERNET_MESSAGE, Toast.LENGTH_SHORT).show()
+                setMyProgressBarVisibility(false)
+                noInternetCardView.visibility = CardView.VISIBLE
+            }
+        )
+    }
 }

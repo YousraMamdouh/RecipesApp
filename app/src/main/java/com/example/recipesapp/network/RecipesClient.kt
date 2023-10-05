@@ -8,12 +8,6 @@ import com.example.recipesapp.model.Recipe
  * This class implements the [RemoteService] interface to provide a way to retrieve a list of recipes.
  */
 class RecipesClient : RemoteService {
-
-//    val apiService: ApiService by lazy {
-//        RetrofitHelper.retrofitInstance.create(ApiService::class.java)
-//    }
-//
-//
     /**
      * A companion object for creating a singleton instance of [RecipesClient].
      */
