@@ -2,8 +2,6 @@ package com.example.recipesapp.view
 
 import com.example.recipesapp.R
 import com.example.recipesapp.model.Recipe
-
-c
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
@@ -35,11 +33,11 @@ class RecipesAdabter(
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val currentStore:Recipe = getItem(position)
+        val currentRecipe:Recipe = getItem(position)
       //  Glide.with(context).load(currentStore.storeLogo).placeholder(R.drawable.placeholder_image).into(holder.StoreImage)
 
-        holder.storeName.text = currentStore.name
-        holder.storeDescription.text = currentStore.description
+        holder.recipeName.text = currentRecipe.name
+        holder.recipeDescription.text = currentRecipe.description
 
 
 
@@ -47,8 +45,8 @@ class RecipesAdabter(
     }
 
     class ViewHolder(private val itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val storeName = itemView.findViewById<TextView>(R.id.)
-        val storeDescription = itemView.findViewById<TextView>(R.id.)
+        val recipeName = itemView.findViewById<TextView>(R.id.recipeName)
+        val recipeDescription = itemView.findViewById<TextView>(R.id.recipeDescription)
       //  val StoreImage=itemView.findViewById<ImageView>(R.id.storeImage)
 
 

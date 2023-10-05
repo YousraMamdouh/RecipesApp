@@ -15,19 +15,19 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/StoreName"
+            android:id="@+id/recipeName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:text="TextView"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/StoreDescription"
+            app:layout_constraintBottom_toTopOf="@+id/recipeDescription"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/cardView"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/StoreDescription"
+            android:id="@+id/recipeDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -38,7 +38,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/cardView"
-            app:layout_constraintTop_toBottomOf="@+id/StoreName" />
+            app:layout_constraintTop_toBottomOf="@+id/recipeName" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
