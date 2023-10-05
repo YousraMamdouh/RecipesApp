@@ -43,15 +43,21 @@ class HomeView : AppCompatActivity() {
         viewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
 
     }
-    private fun observeRecipesLiveData()
-    {
+
+    /**
+     * Observes the LiveData for recipes and updates the RecyclerView when data changes.
+     */
+    private fun observeRecipesLiveData() {
         viewModel.recipes.observe(this) { recipes ->
             if (recipes != null) {
                 adapter.submitList(recipes)
             }
         }
     }
-/*Function for the setup of recycler view*/
+
+    /**
+     * Sets up the RecyclerView for displaying recipes.
+     */
     private fun setUpRecyclerView() {
         layoutManager = LinearLayoutManager(this)
         layoutManager.orientation = RecyclerView.VERTICAL
