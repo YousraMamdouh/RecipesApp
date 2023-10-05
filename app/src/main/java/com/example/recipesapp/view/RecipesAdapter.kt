@@ -4,6 +4,7 @@ import com.example.recipesapp.R
 import com.example.recipesapp.model.Recipe
 import android.content.Context
 import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +23,6 @@ import androidx.recyclerview.widget.RecyclerView
 class RecipesAdapter(
     private var context: Context, private var array: ArrayList<Recipe>,
 ) : androidx.recyclerview.widget.ListAdapter<Recipe, RecipesAdapter.ViewHolder>(MyDiffUtil()) {
-
     var myContext: Context
 
     init {
@@ -30,7 +30,6 @@ class RecipesAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        //    val context:FragmentA
         context = parent.context
         //Inflate the layout for each item in the RecyclerView.
         val view = LayoutInflater.from(parent.context).inflate(R.layout.recipe_item, parent, false)
@@ -44,12 +43,9 @@ class RecipesAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // Bind data to the views of each RecyclerView item.
         val currentRecipe: Recipe = getItem(position)
-        //  Glide.with(context).load(currentStore.storeLogo).placeholder(R.drawable.placeholder_image).into(holder.StoreImage)
         holder.recipeName.text = currentRecipe.name
         holder.recipeDescription.text = currentRecipe.description
         holder.recipeImage.setImageURI(Uri.parse(currentRecipe.thumb))
-
-
     }
 
     /**
