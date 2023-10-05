@@ -4,7 +4,10 @@ import android.content.Context
 import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +16,7 @@ import com.example.recipesapp.R
 import com.example.recipesapp.model.Repository
 import com.example.recipesapp.utilities.NetworkChecker
 import com.example.recipesapp.network.RecipesClient
+import com.example.recipesapp.utilities.Constants
 import com.example.recipesapp.viewModel.HomeViewModel
 import com.example.recipesapp.viewModel.HomeViewModelFactory
 
@@ -29,7 +33,8 @@ class HomeView : AppCompatActivity() {
     private lateinit var adapter: RecipesAdapter
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var progressBar: ProgressBar
-    private lateinit var noInternetRecyclerView: CardView
+    private lateinit var noInternetCardView:CardView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,21 +43,25 @@ class HomeView : AppCompatActivity() {
         createViewModel()
         setMyProgressBarVisibility(true)
         setUpRecyclerView()
+      //  noInternetCardView.visibility = CardView.VISIBLE
 
         // Initialize the ConnectivityManager to check network connectivity
         val connectivityManager =
             getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         // Create an instance of NetworkChecker to perform network checks
         val networkChecker = NetworkChecker(connectivityManager)
-        // Initially, set the "No Internet" RecyclerView to be visible
-        noInternetRecyclerView.visibility = RecyclerView.VISIBLE
+
         // Perform a network check and handle visibility based on network availability
         networkChecker.performAction {
-            // When the network is available, observe recipes LiveData
+            // Code to execute when there is a valid internet connection
             observeRecipesLiveData()
-            // Hide the "No Internet" RecyclerView when the network is available
-            noInternetRecyclerView.visibility = RecyclerView.GONE
         }
+
+
+
+
+
+
     }
 
     /**
@@ -73,9 +82,13 @@ class HomeView : AppCompatActivity() {
      */
     private fun observeRecipesLiveData() {
         viewModel.recipes.observe(this) { recipes ->
-            if (recipes != null) {
+            if (!recipes.isNullOrEmpty()){
                 adapter.submitList(recipes)
                 setMyProgressBarVisibility(false)
+        }
+        else
+            {
+                Toast.makeText(this, Constants.API_RESPONSE_ERROR, Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -97,7 +110,7 @@ class HomeView : AppCompatActivity() {
     private fun initializeViews() {
         recyclerView = findViewById(R.id.recyclerView)
         progressBar = findViewById(R.id.progressBar)
-        noInternetRecyclerView = findViewById(R.id.internetProblemCardView)
+        noInternetCardView = findViewById(R.id.internetProblemCardView)
     }
 
     /**
@@ -111,4 +124,6 @@ class HomeView : AppCompatActivity() {
         else
             progressBar.visibility = ProgressBar.GONE
     }
+
+
 }

@@ -20,7 +20,6 @@ class HomeViewModel(private val _repo: RepoInterface) : ViewModel() {
 
     // Expose the recipes as LiveData to observe changes from the UI.
     val recipes: LiveData<List<Recipe>> = _recipes
-
     /**
      * Initializes the ViewModel and fetches recipes from the API.
      */

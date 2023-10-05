@@ -1,8 +1,8 @@
-package com.example.recipesapp.network
+package com.example.recipesapp.utilities
 /**
  * Object containing network-related constants for the Recipes App.
  */
-object NetworkConstants {
+object Constants {
         /**
          * The base URL for the remote API from which recipes are fetched.
          */
@@ -11,4 +11,6 @@ object NetworkConstants {
          * A tag used for logging API responses , to know whether the data retrieved successfully or not .
          */
         const val TAG = "Api Response"
+        const val NO_INTERNET_MESSAGE = "No internet connection! check you connection and try again"
+        const val API_RESPONSE_ERROR = "An error occurred while processing your request. Please try again later"
 }
